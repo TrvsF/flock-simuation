@@ -52,7 +52,7 @@ public class Roadway {
             Vec2d directionVec = new Vec2d(vehicle.getX() - (goal.getX() + (float) goal.getWidth() / 2),
                     vehicle.getY() - (goal.getY() + (float) goal.getHeight() / 2)); // mafs
             float angle = (float) Math.atan2(directionVec.y, directionVec.x);
-            vehicle.setRotation(angle);
+            vehicle.setRotation((float) (angle + Math.PI));
         }
     }
 
@@ -67,7 +67,7 @@ public class Roadway {
     public float getRotateTarget(Vehicle vehicle) {
         Vec2d directionVec = new Vec2d(vehicle.getX() - (goal.getX() + (float) goal.getWidth() / 2),
                 vehicle.getY() - (goal.getY() + (float) goal.getHeight() / 2));
-        return (float) Math.atan2(directionVec.y, directionVec.x);
+        return (float) (Math.atan2(directionVec.y, directionVec.x) + Math.PI);
     }
 
     public float getRotateMidpoint(Vehicle vehicle) {
@@ -77,8 +77,7 @@ public class Roadway {
 
     public void tickVehicles() {
         for (Vehicle vehicle : this.vehicles) {
-            float rotation = (float) (((getRotateMidpoint(vehicle) + getRotateTarget(vehicle) + getAverageRotation()) / 3)
-                    /  (2*Math.PI));
+            float rotation = getRotateTarget(vehicle) + getRotateMidpoint(vehicle);
             vehicle.setTargetRotation(rotation);
             vehicle.wander();
         }

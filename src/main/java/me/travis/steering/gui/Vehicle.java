@@ -44,7 +44,7 @@ public class Vehicle extends JPanel {
     }
 
     public void wander() {
-        this.rotation += this.randomRotationOffset() + ((this.targetRotation - this.rotation) / 10f);
+        this.rotation += this.randomRotationOffset() + ((this.targetRotation - this.rotation) / 20f);
         this.moveVehicle(Math.cos(this.rotation), Math.sin(this.rotation));
     }
 
