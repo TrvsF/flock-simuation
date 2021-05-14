@@ -77,6 +77,11 @@ public class Roadway {
 
     public void tickVehicles() {
         for (Vehicle vehicle : this.vehicles) {
+            /*
+             * getRotateMidpoint steers toward the midpoint of the flock
+             * getRotateTarget steers toward the target
+             * wander() will offset rotation a little
+             */
             float rotation = (float) (((getRotateMidpoint(vehicle) + getRotateTarget(vehicle) + getAverageRotation()) / 3)
                     /  (2*Math.PI));
             vehicle.setTargetRotation(rotation);
